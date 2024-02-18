@@ -1,0 +1,53 @@
+import random
+
+print("math game")
+
+OPERATIONS = ['+', '-', '*']
+QUESTIONS_IN_ROUND = 5
+
+rounds = int(input("How many rounds you want? "))
+name = input("What your name? ")
+print(f"Hello {name} you have 5 questions to answer in every round. Good luck!")
+final_grade = 0
+final_score = 0
+sum = 0
+questions = 0
+
+for round in range(1,rounds+1):
+    score = 0
+    ans = 0
+    grade = 0
+    print(f"round {round}:")
+    questions += 1
+    for i in range(1,6):
+        oper = random.choice(OPERATIONS)
+        if oper == '*':
+            num1 = random.randint(1,10)
+            num2 = random.randint(1,10)
+            ans = num1 * num2
+            player_ans = int(input(f"{num1} {oper} {num2} = "))
+        else:
+            num1 = random.randint(1, 50)
+            num2 = random.randint(1, 50)
+            if num1 > num2:
+                if oper == '+':
+                    ans = num1 + num2
+                else:
+                    ans = num1 - num2
+                player_ans = int(input(f"{num1} {oper} {num2} = "))
+            else:
+                if oper == '+':
+                    ans = num2 + num1
+                else:
+                    ans = num2 - num1
+                player_ans = int(input(f"{num2} {oper} {num1} = "))
+
+        if player_ans == ans:
+            score += 1
+            grade += 20
+    print(f"You got in round {round} {score}/5")
+    print(f"Your grade in round {round} is {grade}")
+    sum += grade
+    final_score += score
+final_grade = sum/rounds
+print(f"Your final grade is {final_grade}\nyour final score is {final_score}/ {QUESTIONS_IN_ROUND*rounds}")
